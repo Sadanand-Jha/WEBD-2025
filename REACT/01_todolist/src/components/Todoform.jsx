@@ -16,12 +16,12 @@ function Todoform() {
     }
 
     return (
-    <div className='flex justify-center w-full'>
-        <form onSubmit={add} className='w-full flex justify-center'>
+    <div className=''>
+        <form onSubmit={add} className='w-full'>
             <input type="text" 
             placeholder='Write a Todo!'
-            className='w-1/2 p-3 m-10 rounded-md '
-            style={{backgroundColor: '#FF9149'}}
+            className='p-3 mr-4 h-13 cursor-pointer mt-10 rounded-md'
+            style={{backgroundColor: 'pink', width: "740px" , marginLeft: "310px", color: 'black'}}
             value = {task}
             maxLength={10}
             max={10}

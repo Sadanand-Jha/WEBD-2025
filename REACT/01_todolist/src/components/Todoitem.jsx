@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
+import { MdEdit } from "react-icons/md";
 import { useTodo } from '../contexts/todocontext';
+import { IoSaveOutline } from "react-icons/io5";
+import { MdDelete } from "react-icons/md";
+
 function Todoitem({todo}) {
     console.log(todo.task, 1234);
     const [isEditable, setIsEditable] = useState(false);
@@ -38,7 +42,7 @@ function Todoitem({todo}) {
         readOnly = {!isEditable}
         />
 
-        <button className='cursor-pointer bg-blue-700 text-black p-3 m-3 rounded-sm'
+        <button className='cursor-pointer bg-blue-700 text-black p-3 m-3 rounded-sm w-15 flex justify-center'
         onClick={() => {
             if(todo.completed) return;
             if(isEditable) edittodo();
@@ -48,13 +52,13 @@ function Todoitem({todo}) {
         }}
         style={{backgroundColor: '#AFDDFF'}}
         disabled={todo.completed}
-        >{isEditable? 'Save': 'Edit'}</button>
+        >{isEditable? <IoSaveOutline style={{scale:'1.5'}}/>: <MdEdit style={{scale:'1.5'}}/>}</button>
 
-        <button className='cursor-pointer bg-red-500 text-white rounded-sm p-3 m-3 font-bold'
+        <button className='cursor-pointer bg-red-500 text-white rounded-sm pt-3 m-3 font-bold w-15 flex justify-center'
         onClick={() => {
             removetodo(todo.id);        
         }}
-        > Delete
+        > <MdDelete style={{scale:'1.6'}}/>
         </button>
     </div>
   )
