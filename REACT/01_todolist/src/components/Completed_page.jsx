@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import Todoform from './Todoform'
+import Todocontext from '../contexts/todocontext'
 
 function Completed() {
+  const {Todos} = useContext(Todocontext)
   return (
-    <div>Completed</div>
+    <div>
+    </div>
   )
 }
 

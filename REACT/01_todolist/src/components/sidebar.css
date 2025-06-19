@@ -14,9 +14,7 @@
     margin-bottom: 10px;
     padding: 3px;
 }
-.sidebar_option:hover{
-    background-color: hsl(300, 11%, 78%);
-}
+
 .navbar{
     margin-bottom: 10px;
 }

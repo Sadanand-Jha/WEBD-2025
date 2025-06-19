@@ -1,13 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useTodo } from '../contexts/todocontext.js'
 import Todocontext from '../contexts/todocontext'
 import {Todoitem, Todoform} from '../components/index.js'
 import Sidebar from '../components/Sidebar.jsx'
+import SidebarOpenCloseContext from '../contexts/sidebarcontext.js'
 
 
 function FullScreen() {
 
   const [Todos, setTodos] = useState([]);
+  const {sidebarOpen} = useContext(SidebarOpenCloseContext)
   
   useEffect(() => {
     const todo = JSON.parse(localStorage.getItem('todolist'))
@@ -35,7 +37,7 @@ function FullScreen() {
   }
 
   return (
-    <div className='h-full'>
+    <div>
       <Todocontext value={{addtodo, updatetodo, removetodo, Todos, togglecomplete}} >
         <div>
             <Todoform/>

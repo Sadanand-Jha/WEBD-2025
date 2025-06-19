@@ -46,43 +46,49 @@ function Sidebar() {
                 </div>
             </div>
 
-            <div className='optionbox flex flex-col justify-between' style={{height: '670px'}}>
-                <div className='up'>
-                    <NavLink to={"#"}>
-                        <div className="sidebar_option">
-                            <CiSearch className='sidebar_icons'/>
-                            Search
-                        </div>
-                    </NavLink>
-                    <NavLink to={'/'}>
-                        <div className="sidebar_option">
-                            <LuListTodo className='sidebar_icons'/>
-                            Today
-                        </div>
+            <div className='optionbox flex flex-col justify-between' style={{height: '90lvh'}}>
+                <div className='up mt-5'>
+                
+                    <NavLink to={'/'} >
+                    {({isActive}) => (
+                                <div className={`sidebar_option ${isActive ? "bg-pink-200 font-bold rounded" : ""}`}>
+                                    <LuListTodo className='sidebar_icons'/>
+                                    Today
+                                </div>)}
                     </NavLink>
                     <NavLink  to={'/inbox'}>
-                        <div className="sidebar_option" >
-                            <BsInbox className='sidebar_icons'/>
-                            Inbox
-                        </div>
+                        {({isActive}) => (
+                                <div className={`sidebar_option ${isActive ? "bg-pink-200 font-semibold rounded" : ""}`}>
+                                    <BsInbox className='sidebar_icons'/>
+                                    Inbox
+                                </div>
+                        )}
                     </NavLink>
                     <NavLink to={'/upcoming'}>
-                        <div className="sidebar_option">
-                            <SlCalender className='sidebar_icons'/>
-                            Upcomings
-                        </div>
+                        {({isActive}) => (
+                                <div className={`sidebar_option ${isActive ? "bg-pink-200 font-semibold rounded" : ""}`}>
+                                    <SlCalender className='sidebar_icons'/>
+                                    Upcomings
+                                </div>
+                        )}
                     </NavLink>
-                    <NavLink to={'/filter'}>
-                        <div className="sidebar_option">
-                            <CiFilter className='sidebar_icons'/>
-                            Filter
-                        </div>
+                    <NavLink to={'/filter'} >
+                        {
+                            ({isActive}) => (
+                                <div className={`sidebar_option ${isActive ? "bg-pink-200 font-semibold rounded" : ""}`}>
+                                    <CiFilter className='sidebar_icons'/>
+                                    Filter
+                                </div>
+                            )
+                        }
                     </NavLink>
-                    <NavLink to={'/completed'}>
-                        <div className="sidebar_option">
-                            <CiCircleCheck className='sidebar_icons'/>
-                            Completed
+                    <NavLink to="/completed">
+                    {({ isActive }) => (
+                        <div className={`sidebar_option ${isActive ? "bg-pink-200 font-semibold rounded" : ""}`}>
+                        <CiCircleCheck className="sidebar_icons" />
+                        Completed
                         </div>
+                    )}
                     </NavLink>
                 </div>
                 <div className="down">

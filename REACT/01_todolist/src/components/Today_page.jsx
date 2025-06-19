@@ -7,9 +7,9 @@ import Usercontext from '../contexts/usercontext.js';
 import {createBrowserRouter,RouterProvider} from "react-router-dom";
 
 function Today() {
-  
+  const {sidebarOpen} = useContext(SidebarOpenCloseContext);
   return (
-    <div>
+    <div >
       <FullScreen/>
     </div>
   )
