@@ -4,6 +4,7 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { app } from '../firebase';
 function page() {
 
+   
     const auth = getAuth(app)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
