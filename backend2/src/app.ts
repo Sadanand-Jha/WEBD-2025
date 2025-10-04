@@ -19,6 +19,9 @@ app.use(cors({
 import  healthCheckrouter  from './routes/healthCheck.routes.ts'
 app.use('/api/v1/healthcheck', healthCheckrouter)
 
+import authRouter from './routes/auth.routes.ts'
+app.use('/api/v1/auth', authRouter)
+
 
 app.get('/testing', (req: Request, res: Response) => {
     res.send("IT IS STILL WORKING")
