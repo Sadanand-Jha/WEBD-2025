@@ -60,7 +60,7 @@ const UserSchema = new Schema({
     },
     isEmailVerified: {
         type: Boolean,
-        default: true
+        default: false
     },
     refreshToken: {
         type: String,
