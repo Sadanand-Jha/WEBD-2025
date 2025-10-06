@@ -6,6 +6,7 @@ import crypto from 'crypto'
 import { Model, Document } from 'mongoose';
 
 export interface IUser extends Document{
+    _id: mongoose.Types.ObjectId,
     avatar: {url: string, localPath: string},
     userName: string,
     email: string,

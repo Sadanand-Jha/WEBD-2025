@@ -4,11 +4,12 @@ import { asyncHandler } from "../utils/asyncHandler.ts";
 import { Request, Response } from "express";
 import sendEmail, { emailVerificationEmailMailGen } from "../utils/mail.ts";
 import ApiResponse from "../utils/apiResponse.ts";
+import mongoose from 'mongoose'
 
-const generateRefreshTokenAndAccessToken = async function (userId: string) {
+const generateRefreshTokenAndAccessToken = async function (userId: mongoose.Types.ObjectId) {
     try {
         const user: IUser | null = await Users.findById(userId)
-        if (!user) return;
+        if (!user) return new ApiError(400, "User not found!")
         const refreshToken: string = user.generateRefreshToken()
         const accessToken: string = user.generateAccessToken()
 
@@ -71,5 +72,52 @@ const registerUser = asyncHandler(async (req: Request, res: Response) => {
         )
 })
 
+const loginUser = asyncHandler(async (req: Request, res: Response) => {
+    const { email, password } = req.body
+    const user: IUser | null = await Users.findOne({email})
+
+    if (!user) {
+        return res.status(400)
+            .json(
+                new ApiError(400, "User not found While registering!")
+            )
+    }
+
+    // check if password is correct or not!
+    if (!await user.isPasswordCorrect(password)) {
+        return res.status(412)
+            .json(
+                new ApiError(412, "Password is not correct!")
+            )
+    }
+
+    const tokenResult = await generateRefreshTokenAndAccessToken(user._id)
+
+    if (tokenResult instanceof ApiError) {
+        console.error("Token generation failed:", tokenResult.message);
+        return;
+    }
+
+    const {accessToken, refreshToken} = tokenResult
+
+    const loggedInUser = await Users.findById(user._id).select(
+        "-password -refreshToken -emailVerificationToken -emailVerificationExpiry"
+    )
+
+    const options = {
+        httpOnly: true,
+        secure: true
+    }
+
+    return res
+        .status(200)
+        .cookie("accessToken", accessToken, options)
+        .cookie("refreshToken", refreshToken, options)
+        .json(
+            new ApiResponse(200, {
+                user: loggedInUser,
+            })
+        )
+})
 export default registerUser
-export { generateRefreshTokenAndAccessToken }
+export { generateRefreshTokenAndAccessToken, loginUser }
